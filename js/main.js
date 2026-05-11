@@ -1,42 +1,46 @@
-$(document).ready( function() {
+(function () {
+  var container = document.getElementById('tab-container');
+  if (!container) return;
 
-	// Logo
-	var $logo 	= $('#logo');
-	 if (location.href.indexOf("#") != -1) {
-        if(location.href.substr(location.href.indexOf("#"))!='#about'){
-        	$logo.show();
-        }
-    }
-    
-	// Show logo 
-	$('#tab-container .tab a').click(function() {
-	  $logo.slideDown('slow');
-	});
-	// Hide logo
-	$('#tab-about').click(function() {
-	  $logo.slideUp('slow');
-	});	
-function animMeter(){
-    $(".meter > span").each(function() {
-                $(this)
-                    .data("origWidth", $(this).width())
-                    .width(0)
-                    .animate({
-                        width: $(this).data("origWidth")
-                    }, 1200);
-            });
-}
-animMeter();
+  var tabs = container.querySelectorAll('.etabs .tab a');
+  var panels = ['about', 'resume', 'portfolio', 'contact']
+    .map(function (id) { return document.getElementById(id); });
+  var logo = document.getElementById('logo');
 
-      $('#tab-container').easytabs({
-        animate			: true,
-        updateHash		: true,
-        transitionIn	: 'slideDown',
-        transitionOut	: 'slideUp',
-        animationSpeed	: 600,
-        tabActiveClass	: 'active'}).bind('easytabs:midTransition', function(event, $clicked, $targetPanel){
-            if($targetPanel.selector=='#resume'){
-                    animMeter();
-            }
-        });
+  function animateMeters() {
+    document.querySelectorAll('#resume .meter > span').forEach(function (s) {
+      var target = s.dataset.width || s.style.width;
+      s.dataset.width = target;
+      s.style.transition = 'none';
+      s.style.width = '0';
+      requestAnimationFrame(function () {
+        s.style.transition = 'width 1.2s ease-out';
+        s.style.width = target;
+      });
     });
+  }
+
+  function activate(hash) {
+    var id = (hash || '').replace('#', '');
+    if (!panels.some(function (p) { return p && p.id === id; })) id = 'about';
+    panels.forEach(function (p) { if (p) p.hidden = (p.id !== id); });
+    tabs.forEach(function (a) {
+      var on = a.getAttribute('href') === '#' + id;
+      a.classList.toggle('active', on);
+      a.parentNode.classList.toggle('active', on);
+    });
+    if (logo) logo.hidden = (id === 'about');
+    if (id === 'resume') animateMeters();
+  }
+
+  tabs.forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var hash = a.getAttribute('href');
+      if (location.hash !== hash) history.pushState(null, '', hash);
+      activate(hash);
+    });
+  });
+  window.addEventListener('hashchange', function () { activate(location.hash); });
+  activate(location.hash);
+})();
