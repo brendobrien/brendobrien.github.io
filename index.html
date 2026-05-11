@@ -13,18 +13,10 @@
   <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-144x144-precomposed.png">
   <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
+  <link rel="preload" as="image" href="images/PhiPhi.webp" type="image/webp">
   <link rel="stylesheet" href="css/normalize.min.css">
   <link rel="stylesheet" href="css/main.css">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-  <script src="js/vendor/jquery.hashchange.min.js"></script>
-  <script src="js/vendor/jquery.easytabs.min.js"></script>
-
-  <script src="js/main.js"></script>
-  <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-      <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
-      <![endif]-->
+  <script src="js/main.js" defer></script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9KQFGCVJLC"></script>
   <script>
@@ -43,7 +35,7 @@
     <div class="main wrapper clearfix">
       <!-- Header Start -->
         <header id="header">
-            <div id="logo">
+            <div id="logo" hidden>
                 <h2>
                     Brendan O'Brien
                 </h2>
@@ -140,7 +132,7 @@
                 </div>
               <!-- End About Tab Data -->
               <!-- Resume Tab Data -->
-                <div id="resume">
+                <div id="resume" hidden>
                     <section class="clearfix">
                         <div class="g2">
                             <h3>
@@ -550,7 +542,7 @@
                 </div>
               <!-- End Resume Tab Data -->
               <!-- Portfolio Tab Data -->
-                <div id="portfolio">
+                <div id="portfolio" hidden>
                     <section class="clearfix">
                         <div class="g1">
                             <div class="image">
@@ -907,7 +899,7 @@
                 </div>
               <!-- End Portfolio Data -->
               <!-- Contact Tab Data -->
-                <div id="contact">
+                <div id="contact" hidden>
                     <section class="clearfix">
                        <div class="g1">
                          <div class="sny-icon-box">

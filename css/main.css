@@ -166,7 +166,11 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 /* Backgrounds */
 
 .bg-1{
-  background-image: url('../images/PhiPhi.jpg');
+  background-image: url('../images/PhiPhi-fallback.jpg');
+  background-image: image-set(
+    url('../images/PhiPhi.webp') type('image/webp'),
+    url('../images/PhiPhi-fallback.jpg') type('image/jpeg')
+  );
 }
 
 /* Header */
@@ -175,8 +179,6 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 }
 #header #logo{
   text-align: center;
-
-  display: none;
 }
 #header h4{
   margin-bottom:0px; 
